@@ -27,4 +27,4 @@ const initializeDatabase = async () => {
 
 initializeDatabase();
 
-export default pool;
+export default initializeDatabase;
