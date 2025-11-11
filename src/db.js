@@ -17,7 +17,7 @@ const initializeDatabase = async () => {
         id SERIAL PRIMARY KEY,
         context TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
       `
     );
@@ -27,4 +27,4 @@ const initializeDatabase = async () => {
 
 initializeDatabase();
 
-export default initializeDatabase;
+export default pool;
