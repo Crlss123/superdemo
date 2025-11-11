@@ -1,23 +1,19 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import router from "./routes/postRoutes.js";
-
+import express from 'express';
+import postRoutes from './routes/postRoutes.js';
+import cors from 'cors';
+import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = 3000;
 
 app.use(express.json());
 app.use(cors());
-app.use("/api/posts/", router);
+app.use('/api/posts', postRoutes)
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(port);
 
-app.get("/", (req, res) => {
-  res.status(201).json({
-    hola: "hola",
-  });
-});
+app.get('/', (req, res) => {
+    res.send('Hola Mundo');
+})
+console.log(`Server is running on http://localhost:${port}`);

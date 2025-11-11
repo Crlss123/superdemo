@@ -5,31 +5,41 @@ export const createPost = async (req, res) => {
 
   try {
     const insertPostQuery = `
-      INSERT INTO posts (content)
-      VALUES ($1)
-      RETURNING id, content, created_at
-    `;
+            INSERT INTO posts (content)
+            VALUES ($1)
+            RETURNING id, content, created_at;
+        `;
     const result = await query(insertPostQuery, [content]);
-    res.status(201).json(result.rows[0]);
+    res.json(result.rows[0]);
   } catch (error) {
-    res.status(400).json({
-      error: error.message,
-    });
+    res.status(400).json({ error: error.message });
   }
 };
 
 export const getAllPosts = async (req, res) => {
   try {
     const getPostsQuery = `
-      SELECT id, content, created_at
-      FROM posts
-      ORDER BY created_at DESC
-    `;
+            SELECT id, content, created_at
+            FROM posts
+            ORDER BY created_at DESC;
+        `;
     const result = await query(getPostsQuery);
-    res.status(200).json(result.rows);
+    res.json(result.rows);
   } catch (error) {
-    res.status(500).json({
-      error: error.message,
-    });
+    res.status(400).json({ error: error.message });
+  }
+};
+
+export const deletePost = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletePostQuery = `
+            DELETE FROM posts
+            WHERE id = $1
+            RETURNING id;
+        `;
+    const result = await query(deletePostQuery, [id]);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
