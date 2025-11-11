@@ -1,4 +1,4 @@
-import { query } from "../db";
+import { query } from "../db.js";
 
 export const createPost = async (req, res) => {
   const { content } = req.body;
@@ -13,8 +13,8 @@ export const createPost = async (req, res) => {
     res.status(201).json(result.rows[0]);
   } catch (error) {
     res.status(400).json({
-      'error':error.message
-    })
+      error: error.message,
+    });
   }
 };
 
@@ -29,7 +29,7 @@ export const getAllPosts = async (req, res) => {
     res.status(200).json(result.rows);
   } catch (error) {
     res.status(500).json({
-      'error':error.message
-    })
+      error: error.message,
+    });
   }
 };
